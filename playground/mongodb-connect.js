@@ -20,7 +20,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     console.log('Connected to MongoDB Server.');
 
     // db.collection('Todos').insertOne({
-    //     text: 'Eat lunch',
+    //     text: 'Walk dog',
     //     completed: false
     // }, (err, result) => {
     //     if(err) {
@@ -30,7 +30,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     // });
     //
     db.collection('Users').insertOne({
-        name: 'jarod',
+        name: 'janos',
         age: 29,
         location: '1055 Honved ter Hungary'
     }, (err, result) => {
