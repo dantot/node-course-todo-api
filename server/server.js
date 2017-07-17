@@ -80,33 +80,3 @@ app.listen(port, () => {
 });
 
 module.exports = {app};
-
-// var newTodo = new Todo({
-//     text: 'Cook dinner'
-// });
-//
-// newTodo.save().then((doc) => {
-//     console.log('Save todo', doc);
-// }, (e) => {
-//     console.log('Unable to save todo:', e);
-// });
-
-// var otherTodo = new Todo({
-//     text: 'Something to do'
-// });
-//
-// otherTodo.save().then((doc) => {
-//     console.log(JSON.stringify(doc, undefined, 2));
-// }, (e) => {
-//     console.log('Unable to save todo:', e);
-// });
-
-// var user = new User({
-//     email: 'firius87@gmail.com'
-// });
-//
-// user.save().then((doc) => {
-//     console.log('Save user', doc);
-// }, (e) => {
-//     console.log('Unable to save user:', e);
-// });
