@@ -39,7 +39,7 @@ app.get('/todos/:id', authenticate, (req, res) => {
     var id = req.params.id;
 
     if(!ObjectId.isValid(id)) {
-        return res.send(`id is not valid ${id}`);
+        return res.status(404).send();
     }
 
     Todo.findOne({_id: id, _creator: req.user._id}).then((todo) => {
@@ -48,7 +48,7 @@ app.get('/todos/:id', authenticate, (req, res) => {
         }
         res.send({todo});
     }, (e) => {
-        res.status(400).send('Whoops...');
+        res.status(400).send();
     });
 });
 
@@ -65,7 +65,7 @@ app.delete('/todos/:id', authenticate, (req, res) => {
         }
         res.send({todo});
     }, (e) => {
-        res.status(400).send('Whoops...');
+        res.status(400).send();
     });
 });
 
@@ -100,9 +100,6 @@ app.patch('/todos/:id', authenticate, (req, res) => {
 app.post('/users', (req, res) => {
     var body = _.pick(req.body , ['email', 'password']);
     var user = new User(body);
-
-    // User.findByToken();
-    // user.generateAuthToken
 
     user.save()
     .then((user) => {

@@ -13,7 +13,6 @@ beforeEach(populatedTodos);
 describe('POST /todos', () => {
 
     it('should create a new todo', (done) => {
-
         var text = 'Test todo text';
 
         request(app)
@@ -103,6 +102,13 @@ describe('GET /todos/:id', () => {
             .end(done);
     });
 
+    it('should return 404 for non-object ids', (done) => {
+        request(app)
+            .get('/todos/123abc')
+            .set('x-auth', users[0].tokens[0].token)
+            .expect(404)
+            .end(done);
+    });
 });
 
 describe('DELETE /todos/:id', () => {
@@ -126,20 +132,21 @@ describe('DELETE /todos/:id', () => {
             });
     });
 
-    it('should remove a todo', (done) => {
+    it('not should remove other user todo', (done) => {
         var hexId = todos[0]._id.toHexString();
         request(app)
             .delete(`/todos/${hexId}`)
             .set('x-auth', users[1].tokens[0].token)
             .expect(404)
-            .end((err) => {
-                if(err) {
+            .end((err, res) => {
+                if (err) {
                     return done(err);
                 }
+
                 Todo.findById(hexId).then((todo) => {
                     expect(todo).toExist();
                     done();
-                });
+                }).catch((e) => done(e));
             });
     });
 
